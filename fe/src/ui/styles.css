@@ -1,3 +1,21 @@
+body,
+html {
+  width: 100%;
+  background: #F8F8F8;
+}
+@font-face {
+  font-family: 'Source Sans Pro Regular';
+  src: local('Source Sans Pro'), url(../fonts/SourceSansPro-Regular.ttf) format('truetype');
+}
+
+body {
+  font-family: 'Source Sans Pro Regular';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+}
+
 #page-content-wrapper {
   min-width: 0;
   width: 100%;

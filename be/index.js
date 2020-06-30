@@ -22,6 +22,33 @@ let users = [
         "createdAt": "2020-07-02",
         "updatedAt": "2020-07-02"
     },
+    {
+        "id": "3",
+        "name": "Karl Golka",
+        "dob": "5/15/33",
+        "address": "",
+        "description": "",
+        "createdAt": "2020-07-02",
+        "updatedAt": "2020-07-02"
+    },
+    {
+        "id": "4",
+        "name": "Mike Smith",
+        "dob": "5/15/33",
+        "address": "",
+        "description": "",
+        "createdAt": "2020-07-02",
+        "updatedAt": "2020-07-02"
+    },
+    {
+        "id": "5",
+        "name": "Michael 'Sully'",
+        "dob": "5/15/33",
+        "address": "",
+        "description": "",
+        "createdAt": "2020-07-02",
+        "updatedAt": "2020-07-02"
+    },
 ]
 
 // graphql tyepdefs & resolvers
