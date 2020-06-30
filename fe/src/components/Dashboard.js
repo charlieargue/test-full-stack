@@ -5,6 +5,7 @@ import { ALL_USERS } from '../queries/queries.graphql'
 import UserCard from './UserCard';
 import BigButton from './BigButton';
 import CenteredModal from './CenteredModal';
+import UserForm from './UserForm';
 
 // --------------
 // --------------
@@ -30,7 +31,7 @@ const Dashboard = () => {
                 <Row>
                     {result.data.allUsers.map(u =>
                         <Col xs={12} sm={6} md={6} lg={4} key={u.id} >
-                        {/* onClick={() => setModalShow(true)} */}
+                            {/* onClick={() => setModalShow(true)} */}
                             <UserCard user={u}>
                                 {u.name}
                             </UserCard>
@@ -46,7 +47,9 @@ const Dashboard = () => {
             <CenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-            />
+            >
+                <UserForm />
+            </CenteredModal>
         </>
     )
 }
