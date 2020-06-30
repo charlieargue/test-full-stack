@@ -1,17 +1,40 @@
-import React from 'react';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter as Router } from "react-router-dom"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './ui/styles.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import ApplicationLayout from './components/layout/ApplicationLayout';
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
+import GLOBALS from './globals';
 
+// --------------
+const httpLink = new HttpLink({
+  uri: GLOBALS.API.BASE_URL,
+})
+
+// --------------
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: httpLink
+})
+// --------------
+// --------------
+// --------------
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ApplicationLayout> 
+            <App />
+          </ApplicationLayout>
+        </Suspense>
+      </Router>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
