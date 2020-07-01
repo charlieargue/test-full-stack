@@ -6,13 +6,14 @@ import UserCard from './UserCard';
 import BigButton from './BigButton';
 import CenteredModal from './CenteredModal';
 import UserForm from './UserForm';
+import SearchForm from './SearchForm';
 
 // --------------
 // --------------
 // --------------
 const Dashboard = () => {
     const result = useQuery(ALL_USERS)
-    const [modalShow, setModalShow] = React.useState(true);
+    const [modalShow, setModalShow] = React.useState(false);
 
     // --------------
     if (result.loading) {
@@ -25,8 +26,8 @@ const Dashboard = () => {
         <>
             <Container fluid>
                 <Row>
-                    <Col><h1>Users List</h1></Col>
-                    <Col>Search Input</Col>
+                    <Col><h1 className="mb-5">Users list</h1></Col>
+                    <Col xs={12} md={6}><SearchForm /></Col>
                 </Row>
                 <Row>
                     {result.data.allUsers.map(u =>

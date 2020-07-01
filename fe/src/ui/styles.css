@@ -5,7 +5,19 @@ html {
 }
 @font-face {
   font-family: 'Source Sans Pro Regular';
-  src: local('Source Sans Pro'), url(../fonts/SourceSansPro-Regular.ttf) format('truetype');
+  src: local('Source Sans Pro'), url("../fonts/SourceSansPro-Regular.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro Light';
+  src: local('Source Sans Pro Light'), url("../fonts/SourceSansPro-Light.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro SemiBold';
+  src: local('Source Sans Pro SemiBold'), url("../fonts/SourceSansPro-SemiBold.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro Bold';
+  src: local('Source Sans Pro Bold'), url("../fonts/SourceSansPro-Bold.ttf") format('truetype');
 }
 
 body {
@@ -19,4 +31,71 @@ body {
 #page-content-wrapper {
   min-width: 0;
   width: 100%;
+}
+
+h1 {
+  font-family: 'Source Sans Pro Light';
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 48px !important;
+  line-height: 60px !important;
+}
+
+.row.row-centered {
+  justify-content: center;
+}
+
+.card {
+  max-width: 400px;
+  height: 336px;
+
+}
+
+.card:hover {
+  box-shadow: 1px 1px 6px #e6e6e6, 1px 1px 6px #e6e6e6 !important;
+  cursor: pointer !important;
+}
+
+.card-title {
+  font-family: 'Source Sans Pro Bold';
+  font-size: 19px;
+  line-height: 22px;
+  text-transform: uppercase;
+}
+
+.card-title-byline {
+  font-size: 16px;
+  line-height: 20px;
+  font-family: 'Source Sans Pro Light';
+  text-transform: none;
+  text-align: right;
+}
+
+.card-title-byline span {
+  color: #AF1E1E;
+}
+
+.card:hover .card-title-byline {
+  display: block !important;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-text {
+  font-family: 'Source Sans Pro Light';
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.card .edit-icon {
+  position: absolute;
+  top: 18px;
+  right: 23px;
+}
+.card:hover .edit-icon {
+  display: block !important;
 }

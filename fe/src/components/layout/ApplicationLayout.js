@@ -7,13 +7,13 @@ import { withRouter } from "react-router";
 // --------------
 // --------------
 const AppLayout = ({ children }) => {
-
+    
     // --------------
     return (
-        <Container fluid id="wrapper">
-            <AppBar />
-            <Row>
-                <Col xs={10} id="page-content-wrapper">
+        <Container className="py-5 px-1" fluid id="wrapper">
+            {/* just FYI: <AppBar /> */}
+            <Row className="py-5 px-1 row-centered" >
+                <Col xs={11} id="page-content-wrapper">
                     {children}
                 </Col>
             </Row>
