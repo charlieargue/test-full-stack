@@ -1,5 +1,4 @@
 // ### User Model
-
 // ```
 // {
 //   "id": "xxx",                  // user ID (must be unique)
@@ -11,16 +10,14 @@
 //   "updatedAt": ""               // user updated date
 // }
 // ```
-
-
 const defs = `
 
  type User {
     id: ID!
     name: String!
-    dob: String!
     address: String!
-    description: String!
+    dob: String
+    description: String
     createdAt: String!
     updatedAt: String!
  }
@@ -29,5 +26,24 @@ const defs = `
  type Query {
      allUsers: [User!]!
  }
+
+ type Mutation {
+    
+    createUser(
+      name: String!,
+      address: String!,
+    ): User
+
+    editUser(
+        id: ID!
+        name: String!
+        address: String!,
+      ): User
+    
+    deleteUser(
+        id: ID!
+      ): User
+
+}
 `
 module.exports = defs

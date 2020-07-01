@@ -1,76 +1,33 @@
+require('dotenv').config()
 const { ApolloServer, gql } = require('apollo-server')
-// const { v1: uuid } = require('uuid')
 const defs = require('./graphql/type-defs.graphql')
-
-// --------------
-let users = [
-    {
-        "id": "1",                            // user ID (must be unique)
-        "name": "backend test",                 // user name
-        "dob": "6/16/44",                       // date of birth
-        "address": "237 A St.",                 // user address
-        "description": "testing",               // user description
-        "createdAt": "2020-07-01",              // user created date
-        "updatedAt": "2020-07-01"               // user updated date
-    },
-    {
-        "id": "2",
-        "name": "front-end test💎",
-        "dob": "5/15/33",
-        "address": "444 B St.",
-        "description": "testing 💎",
-        "createdAt": "2020-07-02",
-        "updatedAt": "2020-07-02"
-    },
-    {
-        "id": "3",
-        "name": "Karl Golka",
-        "dob": "5/15/33",
-        "address": "",
-        "description": "",
-        "createdAt": "2020-07-02",
-        "updatedAt": "2020-07-02"
-    },
-    {
-        "id": "4",
-        "name": "Mike Smith",
-        "dob": "5/15/33",
-        "address": "",
-        "description": "",
-        "createdAt": "2020-07-02",
-        "updatedAt": "2020-07-02"
-    },
-    {
-        "id": "5",
-        "name": "Michael 'Sully'",
-        "dob": "5/15/33",
-        "address": "",
-        "description": "",
-        "createdAt": "2020-07-02",
-        "updatedAt": "2020-07-02"
-    },
-]
+const resolvers = require('./graphql/resolvers.graphql')
+const mongoose = require('mongoose')
+const urlDatabase = process.env.MONGODB_URI
+// TODO: backup my .env file somewhere!
+mongoose.set('useFindAndModify', false)
+mongoose.set('useCreateIndex', true)
 
 // graphql tyepdefs & resolvers
 const typeDefs = gql(defs)
-const resolvers = {
-    Query: {
-        allUsers: () => {
-            return users
-        },
-    },
-}
+
+// connect to DB
+console.log('connecting to', urlDatabase)
+mongoose.connect(urlDatabase, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('connected to MongoDB')
+    })
+    .catch((error) => {
+        console.log('error connection to MongoDB:', error.message)
+    })
 
 
-// wire-up the server
+
+// wire-up and fire-up the server
 const server = new ApolloServer({
     typeDefs,
     resolvers,
 })
-
-// fire-up the server
 server.listen().then(({ url }) => {
     console.log(`Server ready at ${url}`)
 })
-
-
