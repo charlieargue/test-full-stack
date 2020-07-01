@@ -23,18 +23,17 @@ const client = new ApolloClient({
 // --------------
 // --------------
 // --------------
+// NOTE: removed <React.StrictMode> b/c conflict with react-bootstrap modal animation (which was a requirement)
 ReactDOM.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <Router>
-        <Suspense fallback={<div>Loading...</div>}>
-          <ApplicationLayout> 
-            <App />
-          </ApplicationLayout>
-        </Suspense>
-      </Router>
-    </ApolloProvider>
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ApplicationLayout>
+          <App />
+        </ApplicationLayout>
+      </Suspense>
+    </Router>
+  </ApolloProvider>,
   document.getElementById('root')
 );
 

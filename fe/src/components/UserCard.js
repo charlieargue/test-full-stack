@@ -1,11 +1,12 @@
 import React from 'react'
 import { Image, Card, Container, Row, Col } from "react-bootstrap";
 import EditIcon from "../ui/svg/edit-icon.svg"
+import Moment from 'react-moment'
 
 // --------------
 // --------------
 // --------------
-const UserCard = ({ user, openModal  }) => {
+const UserCard = ({ user, openModal }) => {
     // --------------
     return (
         <Card className="p-3 py-5 mb-5" onClick={() => openModal(true)}>
@@ -31,12 +32,15 @@ const UserCard = ({ user, openModal  }) => {
                     <Container className="px-0">
                         <Row noGutters={true}>
                             <Col className="text-ellipsis">{user.name}</Col>
-                            <Col className="card-title-byline" style={{ display: "none" }}>created <span>01 Feb 2020</span></Col>
+                            <Col className="card-title-byline" style={{ display: "none" }}>created <span>
+                            {/* WE WANT: 01 Feb 2020 */}
+                            <Moment unix format="DD MMM YYYY">{user.createdAt}</Moment>
+                            </span></Col>
                         </Row>
                     </Container>
                 </Card.Title>
                 <Card.Text className="text-ellipsis">
-                    Lorem ipsum dolor sit amet, consectetur…
+                    {user.description || "Lorem ipsum dolor sit amet, consectetur…"}
                 </Card.Text>
             </Card.Body>
         </Card>

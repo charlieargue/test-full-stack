@@ -6,7 +6,32 @@ query {
     allUsers {
         id
         name,
-      	dob
+        address,
+      	description,
+        createdAt
     }
+}
+`
+
+export const EDIT_USER = gql`
+mutation editUser(
+    $id: ID!,
+    $name: String!,
+    $address: String!,
+    $description: String!
+) {
+    editUser(
+        id: $id,
+        name: $name,
+        address: $address,
+        description: $description,
+    ) {
+        id
+        name
+        address
+        createdAt
+        updatedAt
+    }
+
 }
 `

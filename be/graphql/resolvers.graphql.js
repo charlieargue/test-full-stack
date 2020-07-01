@@ -25,6 +25,7 @@ const resolvers = {
             const user = await User.findOne({ _id: args.id })
             user.name = args.name
             user.address = args.address
+            user.description = args.description
 
             try {
                 return await user.save()

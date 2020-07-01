@@ -38,6 +38,7 @@ const defs = `
         id: ID!
         name: String!
         address: String!,
+        description: String!,
       ): User
     
     deleteUser(
