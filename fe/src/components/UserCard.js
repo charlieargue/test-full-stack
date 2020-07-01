@@ -5,10 +5,10 @@ import EditIcon from "../ui/svg/edit-icon.svg"
 // --------------
 // --------------
 // --------------
-const UserCard = ({ user }) => {
+const UserCard = ({ user, openModal  }) => {
     // --------------
     return (
-        <Card className="p-3 py-5 mb-5">
+        <Card className="p-3 py-5 mb-5" onClick={() => openModal(true)}>
             <Image
                 className="edit-icon"
                 src={EditIcon}

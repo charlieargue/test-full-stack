@@ -14,6 +14,14 @@ import SearchForm from './SearchForm';
 const Dashboard = () => {
     const result = useQuery(ALL_USERS)
     const [modalShow, setModalShow] = React.useState(false);
+    const [currentUser, setCurrentUser] = useState(null)
+
+    // --------------
+    const handleOpenModal = (cu) => {
+        console.log('cu', cu)
+        setCurrentUser(cu)
+        setModalShow(true)
+    }
 
     // --------------
     if (result.loading) {
@@ -32,8 +40,9 @@ const Dashboard = () => {
                 <Row>
                     {result.data.allUsers.map(u =>
                         <Col xs={12} sm={6} md={6} lg={4} key={u.id} >
-                            {/* onClick={() => setModalShow(true)} */}
-                            <UserCard user={u}>
+                            <UserCard
+                                user={u}
+                                openModal={() => handleOpenModal(u)}>
                                 {u.name}
                             </UserCard>
                         </Col>
@@ -41,15 +50,17 @@ const Dashboard = () => {
                 </Row>
                 <Row className="text-center">
                     <Col>
-                        <BigButton className="mx-auto" />
+                        <BigButton className="mx-auto mt-5" />
                     </Col>
                 </Row>
             </Container>
             <CenteredModal
                 show={modalShow}
-                onHide={() => setModalShow(false)}
             >
-                <UserForm />
+                <UserForm 
+                currentUser={currentUser} 
+                onCancel={() => setModalShow(false)}
+                />
             </CenteredModal>
         </>
     )

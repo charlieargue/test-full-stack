@@ -96,6 +96,50 @@ h1 {
   top: 18px;
   right: 23px;
 }
+
 .card:hover .edit-icon {
   display: block !important;
+}
+
+button.big-button {
+  background: #FFFFFF;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  color: #000 !important;
+}
+
+button.big-button:hover {
+  border: 4px solid rgba(0, 0, 0, 0.4) !important;
+}
+button.big-button:focus {
+  border: 4px solid rgba(0, 0, 0, 0.5) !important;
+}
+
+input.form-control {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-family: 'Source Sans Pro SemiBold';
+  font-weight: normal;
+}
+
+.form-label {
+  font-family: 'Source Sans Pro SemiBold';
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.modal-content {
+  background-color: #F8F8F8;
+}
+
+.modal-content h2 {
+  font-family: 'Source Sans Pro Light';
+  font-weight: 600;
 }

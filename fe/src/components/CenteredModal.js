@@ -13,19 +13,12 @@ const CenteredModal = (props) => {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            animation={false}
+            animation={true}
             backdrop="static"
             keyboard={false}
         >
-            <Modal.Body>
+            <Modal.Body className="m-3">
                 {props.children}
-                {/* <h4>Centered Modal</h4>
-                <p>
-                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-                    dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-                    consectetur ac, vestibulum at eros.
-                </p>
-                <BigButton onClick={props.onHide}/> */}
             </Modal.Body>
         </Modal>
     )
