@@ -13,6 +13,20 @@ query {
 }
 `
 
+export const FILTERED_USERS = gql`
+query FilteredUsers($search: String) {
+    filteredUsers(search: $search) {
+      id
+      name
+      description
+      address
+      createdAt
+    }
+  }
+`
+
+  
+
 export const EDIT_USER = gql`
 mutation editUser(
     $id: ID!,

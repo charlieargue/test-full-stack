@@ -6,6 +6,37 @@ const resolvers = {
         allUsers: () => {
             return User.find({})
         },
+        filteredUsers: async (root, args) => {
+            try {
+                return await User.find({
+                    $or: [
+                        {
+                            "name": {
+                                "$regex": args.search || "",
+                                "$options": "i"
+                            },
+                        },
+                        {
+                            "address": {
+                                "$regex": args.search || "",
+                                "$options": "i"
+                            },
+                        },
+                        {
+                            "description": {
+                                "$regex": args.search || "",
+                                "$options": "i"
+                            },
+                        }
+                    ]
+                })
+            } catch (error) {
+                throw new UserInputError(error.message, {
+                    invalidArgs: args,
+                })
+            }
+
+        },
     },
     Mutation: {
         createUser: async (root, args) => {

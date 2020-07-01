@@ -4,13 +4,19 @@ import {
 } from '@apollo/client';
 import { Form, Container, Row, Col } from "react-bootstrap";
 import BigButton from './BigButton';
-import { ALL_USERS, EDIT_USER } from '../queries/queries.graphql'
+import { FILTERED_USERS, EDIT_USER } from '../queries/queries.graphql'
+import Map from '../components/Map.js'
 
 // --------------
 // --------------
 // --------------
 const UserForm = ({ currentUser, onCancel }) => {
-
+    const mapProps = {
+        options: {
+            center: { lat: 20, lng: 40 },
+            zoom: 7,
+        },
+    }
     // component state for managing form state
     const [name, setName] = useState(currentUser.name)
     const [address, setAddress] = useState(currentUser.address)
@@ -20,7 +26,10 @@ const UserForm = ({ currentUser, onCancel }) => {
     // --------------
     const [editUser] = useMutation(EDIT_USER, {
         refetchQueries: [
-            { query: ALL_USERS }
+            {
+                query: FILTERED_USERS,
+                variables: { search: null }
+            }
         ],
         // error handling!
         onError: (error) => {
@@ -48,7 +57,6 @@ const UserForm = ({ currentUser, onCancel }) => {
             }
         })
 
-
         // reset the form
         setName('')
         setAddress('')
@@ -66,7 +74,9 @@ const UserForm = ({ currentUser, onCancel }) => {
                     <Col><h2 className="mb-5">Edit User</h2></Col>
                 </Row>
                 <Row>
-                    <Col>map</Col>
+                    <Col>
+                        <Map {...mapProps} />
+                    </Col>
                     <Col>
                         <Form noValidate validated={validated} onSubmit={submit}>
                             <Form.Group controlId="formName">

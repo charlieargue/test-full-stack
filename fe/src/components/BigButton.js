@@ -14,7 +14,7 @@ const BigButton = (props) => {
     // --------------
     return (
         <Button {...props}
-            className="px-5 py-2 big-button"
+            className="px-5 py-3 big-button"
             style={styles}
             size="lg">{props.text || "Load More"}</Button>
     )

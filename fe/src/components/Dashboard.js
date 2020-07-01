@@ -1,33 +1,33 @@
 import React, { useState } from 'react'
-import { Container, Row, Col } from "react-bootstrap";
-import { useQuery } from '@apollo/client'
-import { ALL_USERS } from '../queries/queries.graphql'
-import UserCard from './UserCard';
-import BigButton from './BigButton';
-import CenteredModal from './CenteredModal';
-import UserForm from './UserForm';
-import SearchForm from './SearchForm';
+import { Container, Row, Col } from "react-bootstrap"
+import BigButton from './BigButton'
+import CenteredModal from './CenteredModal'
+import UserForm from './UserForm'
+import UserList from './UserList'
+import SearchForm from './SearchForm'
+import { debounce } from 'lodash'
 
 // --------------
 // --------------
 // --------------
 const Dashboard = () => {
-    const result = useQuery(ALL_USERS)
     const [modalShow, setModalShow] = React.useState(false);
     const [currentUser, setCurrentUser] = useState(null)
+    const [search, setSearch] = useState('')
 
     // --------------
     const handleOpenModal = (cu) => {
-        console.log('cu', cu)
         setCurrentUser(cu)
         setModalShow(true)
     }
 
     // --------------
-    if (result.loading) {
-        // TODO: style me!
-        return <div>loading...</div>
+    const getSearchPhrase = () => {
+        return search
     }
+
+    // --------------
+    const setSearchDebounced = debounce(setSearch, 1000)
 
     // --------------
     return (
@@ -35,18 +35,15 @@ const Dashboard = () => {
             <Container fluid>
                 <Row>
                     <Col><h1 className="mb-5">Users list</h1></Col>
-                    <Col xs={12} md={6}><SearchForm /></Col>
+                    <Col xs={12} md={6}>
+                        <SearchForm
+                            updateSearchMethod={setSearchDebounced} />
+                    </Col>
                 </Row>
                 <Row>
-                    {result.data.allUsers.map(u =>
-                        <Col xs={12} sm={6} md={6} lg={4} key={u.id} >
-                            <UserCard
-                                user={u}
-                                openModal={() => handleOpenModal(u)}>
-                                {u.name}
-                            </UserCard>
-                        </Col>
-                    )}
+                    <UserList
+                        handleOpenModal={handleOpenModal}
+                        getSearchPhrase={getSearchPhrase} />
                 </Row>
                 <Row className="text-center">
                     <Col>
@@ -57,9 +54,9 @@ const Dashboard = () => {
             <CenteredModal
                 show={modalShow}
             >
-                <UserForm 
-                currentUser={currentUser} 
-                onCancel={() => setModalShow(false)}
+                <UserForm
+                    currentUser={currentUser}
+                    onCancel={() => setModalShow(false)}
                 />
             </CenteredModal>
         </>
