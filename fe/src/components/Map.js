@@ -1,35 +1,35 @@
-import React, { useEffect, useState, useRef } from 'react'
+// thx: https://www.digitalocean.com/community/tutorials/how-to-integrate-the-google-maps-api-into-react-applications
+import React from 'react'
+import { Map, GoogleApiWrapper } from 'google-maps-react'
 
-export default function Map({ options, onMount, className, onMountProps }) {
-    const ref = useRef()
-    const [map, setMap] = useState()
+const mapStyles = {
+    maxWidth: '518px',
+    maxHeight: '336px',
+    width: '90%',
+    height: '90%',
+    borderRadius: "8px"
+}
 
-    useEffect(() => {
-        const onLoad = () => setMap(new window.google.maps.Map(ref.current, options))
-        if (!window.google) {
-            const script = document.createElement(`script`)
-            script.src =
-                `https://maps.googleapis.com/maps/api/js?key=` +
-                process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-            document.head.append(script)
-            script.addEventListener(`load`, onLoad)
-            return () => script.removeEventListener(`load`, onLoad)
-        } else onLoad()
-    }, [options])
-
-    if (map && typeof onMount === `function`) onMount(map, onMountProps)
-
+// --------------
+// --------------
+// --------------
+const MapContainer = (props) => {
+    // --------------
     return (
-        <div
-            style={{ height: `60vh`, margin: `1em 0`, borderRadius: `0.5em` }}
-            {...{ ref, className }}
+        <Map
+            visible={props.getterShowMap()}
+            google={props.google}
+            zoom={14}
+            style={mapStyles}
+            center={props.locationCoordinates}
+            zoomControl={false}
+            mapTypeControl={false}
+            streetViewControl={false}
+            fullscreenControl={false}
         />
     )
 }
 
-Map.defaultProps = {
-    options: {
-        center: { lat: 48, lng: 8 },
-        zoom: 5,
-    },
-}
+export default GoogleApiWrapper({
+    apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+})(MapContainer)

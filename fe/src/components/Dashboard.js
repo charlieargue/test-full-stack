@@ -37,7 +37,7 @@ const Dashboard = () => {
                     <Col><h1 className="mb-5">Users list</h1></Col>
                     <Col xs={12} md={6}>
                         <SearchForm
-                            updateSearchMethod={setSearchDebounced} />
+                            setSearchDebounced={setSearchDebounced} />
                     </Col>
                 </Row>
                 <Row>

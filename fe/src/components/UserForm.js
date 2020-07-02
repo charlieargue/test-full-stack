@@ -1,27 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import {
     useMutation,
-} from '@apollo/client';
-import { Form, Container, Row, Col } from "react-bootstrap";
-import BigButton from './BigButton';
+} from '@apollo/client'
+import { Form, Container, Row, Col } from "react-bootstrap"
+import BigButton from './BigButton'
 import { FILTERED_USERS, EDIT_USER } from '../queries/queries.graphql'
 import Map from '../components/Map.js'
+import { debounce } from 'lodash'
+import Geocode from "react-geocode"
+// set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
+
 
 // --------------
 // --------------
 // --------------
 const UserForm = ({ currentUser, onCancel }) => {
-    const mapProps = {
-        options: {
-            center: { lat: 20, lng: 40 },
-            zoom: 7,
-        },
-    }
     // component state for managing form state
+    const initialCoords = {
+        lat: -1.2884,
+        lng: 36.8233
+    }
     const [name, setName] = useState(currentUser.name)
     const [address, setAddress] = useState(currentUser.address)
     const [description, setDescription] = useState(currentUser.description)
     const [validated, setValidated] = useState(false)
+    const [locationCoordinates, setLocationCoordinates] = useState(initialCoords)
+    const [showMap, setShowMap] = useState(false)
 
     // --------------
     const [editUser] = useMutation(EDIT_USER, {
@@ -43,7 +48,7 @@ const UserForm = ({ currentUser, onCancel }) => {
         const form = event.currentTarget
         if (form.checkValidity() === false) {
             event.stopPropagation()
-            setValidated(true);
+            setValidated(true)
             return
         }
 
@@ -61,10 +66,53 @@ const UserForm = ({ currentUser, onCancel }) => {
         setName('')
         setAddress('')
         setDescription('')
+        // reset showMap
+        setShowMap(false)
 
         // and close it
         onCancel()
     }
+
+    // --------------
+    const getLatLongFromAddress = async (strLocation) => {
+        console.log('🔥 TRYING: strLocation :>> ', strLocation);
+        // Get latidude & longitude from address.
+        try {
+            const response = await Geocode.fromAddress(strLocation)
+            const { lat, lng } = response.results[0].geometry.location
+            console.log(lat, lng)
+            return {
+                lat,
+                lng
+            }
+        } catch (error) {
+            // could not find location, return some recognizable place as default
+            // --------------
+            return initialCoords
+        }
+    }
+
+    // --------------
+    const debouncedGeocoding = useCallback(debounce(async (strLocation) => {
+        console.log('🇿🇼 debounced GEOCODING!')
+        const newCoords = await getLatLongFromAddress(strLocation)
+        setLocationCoordinates(newCoords)
+        setShowMap(true)
+    }, 500), [])
+
+    // --------------
+    const handleAddressChange = async ({ target }) => {
+        setAddress(target.value)
+        debouncedGeocoding(target.value)
+    }
+
+    // -------------- TODO: why the getter again?
+    const getterShowMap = () => showMap
+
+    // --------------
+    useEffect(() => {
+        debouncedGeocoding(currentUser.address)
+    }, [currentUser.address, debouncedGeocoding])
 
     // --------------
     return (
@@ -75,7 +123,9 @@ const UserForm = ({ currentUser, onCancel }) => {
                 </Row>
                 <Row>
                     <Col>
-                        <Map {...mapProps} />
+                        <Map
+                            getterShowMap={getterShowMap}
+                            locationCoordinates={locationCoordinates} />
                     </Col>
                     <Col>
                         <Form noValidate validated={validated} onSubmit={submit}>
@@ -93,7 +143,7 @@ const UserForm = ({ currentUser, onCancel }) => {
                             <Form.Group controlId="formAddress">
                                 <Form.Label>Location</Form.Label>
                                 <Form.Control value={address || ''}
-                                    onChange={({ target }) => setAddress(target.value)}
+                                    onChange={handleAddressChange}
                                     type="text"
                                     required
                                     placeholder="Enter location" />

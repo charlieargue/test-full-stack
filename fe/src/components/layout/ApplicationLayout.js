@@ -6,7 +6,7 @@ import { withRouter } from "react-router";
 // --------------
 // --------------
 const AppLayout = ({ children }) => {
-
+    
     // --------------
     return (
         <Container className="py-5 px-1" fluid id="wrapper">

@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 // --------------
 // --------------
 // --------------
-const SearchForm = ({ updateSearchMethod, phrase }) => {
+const SearchForm = ({ setSearchDebounced, phrase }) => {
     const styles = {
         width: "400px",
     }
@@ -12,7 +12,7 @@ const SearchForm = ({ updateSearchMethod, phrase }) => {
     // --------------
     const handleSearch = ({ target }) => {
         console.log('target.value', target.value)
-        updateSearchMethod(target.value)
+        setSearchDebounced(target.value)
     };
 
     // --------------

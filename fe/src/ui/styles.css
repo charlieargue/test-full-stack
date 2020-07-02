@@ -110,8 +110,9 @@ button.big-button {
   font-family: 'Source Sans Pro SemiBold';
   font-style: normal;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 24px;
   color: #000 !important;
+  width: 240px;
 }
 
 button.big-button:hover {
@@ -124,15 +125,21 @@ button.big-button:focus {
 input.form-control {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  font-family: 'Source Sans Pro SemiBold';
-  font-weight: normal;
+  font-family: 'Source Sans Pro Regular';
+  font-weight: 300;
+  height: 64px;
+  font-size: 24px;
+line-height: 30px;
 }
 
 .form-label {
   font-family: 'Source Sans Pro SemiBold';
   font-weight: 400;
   font-size: 14px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
+}
+.form-group {
+  margin-bottom: 1.5em;
 }
 
 .modal-content {
