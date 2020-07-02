@@ -93,6 +93,8 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
             }
         } catch (error) {
             // could not find location, return some recognizable place as default
+            setMessage('🚨Location not found, please try again!')
+            setShowNotification(true)
             // --------------
             return initialCoords
         }

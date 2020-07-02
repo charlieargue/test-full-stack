@@ -149,4 +149,22 @@ describe('User Tests', () => {
             .should('be.eq', 6)
 
     })
+
+
+    // --------------
+    it('No locations found for map raises toast message', () => {
+
+        cy.contains(beforeName).click()
+        cy.contains('Edit User')
+
+        cy.get('#formAddress')
+            .type('{selectall}{backspace}')
+            .type('asdflkjasdlkfj')
+
+        // cy.wait(500)
+
+        cy
+            .get('.toast')
+            .contains('🚨Location not found, please try again!')
+    })
 })
