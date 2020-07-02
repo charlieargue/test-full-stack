@@ -8,7 +8,6 @@ import { FILTERED_USERS, EDIT_USER } from '../queries/queries.graphql'
 import Map from '../components/Map.js'
 import { debounce } from 'lodash'
 import Geocode from "react-geocode"
-// set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
 
@@ -16,7 +15,6 @@ Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 // --------------
 // --------------
 const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMessage }) => {
-    // component state for managing form state
     const initialCoords = {
         lat: -1.2884,
         lng: 36.8233
@@ -39,15 +37,16 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
                 }
             }
         ],
-        // error handling!
         onError: (error) => {
-            // TODO: combine this into one method!
-            console.log('error :>> ', error);
-            setMessage('🚨Duplicate: Names must be unique!')
+            // TODO: combine Msg+Notification setters into one method!
+            if (JSON.stringify(error).includes('duplicate key error collection')) {
+                setMessage('🚨Duplicate: Names must be unique!')
+            } else {
+                setMessage('🚨An unknown server error occurred.')
+            }
             setShowNotification(true)
         },
         onCompleted: () => {
-            console.log('onCompleted')
             // reset the form
             setName('')
             setAddress('')
@@ -84,12 +83,10 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
 
     // --------------
     const getLatLongFromAddress = async (strLocation) => {
-        console.log('🔥 TRYING: strLocation :>> ', strLocation);
-        // Get latidude & longitude from address.
+        // Get latitude & longitude from address.
         try {
             const response = await Geocode.fromAddress(strLocation)
             const { lat, lng } = response.results[0].geometry.location
-            console.log(lat, lng)
             return {
                 lat,
                 lng
@@ -103,7 +100,6 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
 
     // --------------
     const debouncedGeocoding = useCallback(debounce(async (strLocation) => {
-        console.log('🇿🇼 debounced GEOCODING!')
         const newCoords = await getLatLongFromAddress(strLocation)
         setLocationCoordinates(newCoords)
         setShowMap(true)
@@ -115,7 +111,7 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
         debouncedGeocoding(target.value)
     }
 
-    // -------------- TODO: why the getter again?
+    // -------------- 
     const getterShowMap = () => showMap
 
     // --------------
@@ -174,7 +170,7 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
                             <Container fluid className="pl-0 pt-4">
                                 <Row>
                                     <Col>
-                                        <BigButton type="submit" text="Save" autoFocus />
+                                        <BigButton type="submit" text="Save" autoFocus id="btnSaveUserForm" />
                                     </Col>
                                     <Col>
                                         <BigButton text="Cancel" onClick={onCancel} />

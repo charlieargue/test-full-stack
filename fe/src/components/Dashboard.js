@@ -18,7 +18,6 @@ const Dashboard = ({ setShowNotification, setMessage }) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [search, setSearch] = useState(null)
     const [page, setPage] = useState(0)
-    const [clearedSearch, setClearedSearch] = useState(false)
 
     // --------------
     const handleOpenModal = (cu) => {
@@ -34,11 +33,6 @@ const Dashboard = ({ setShowNotification, setMessage }) => {
     // --------------
     const getPage = () => {
         return page
-    }
-
-    // --------------
-    const getClearedSearch = () => {
-        return clearedSearch
     }
 
     // --------------
@@ -59,7 +53,6 @@ const Dashboard = ({ setShowNotification, setMessage }) => {
                     <Col><h1 className="mb-5">Users list</h1></Col>
                     <Col xs={12} md={6}>
                         <SearchForm
-                            setClearedSearch={setClearedSearch}
                             setPage={setPage}
                             setSearchDebounced={setSearchDebounced} />
                     </Col>
@@ -69,14 +62,16 @@ const Dashboard = ({ setShowNotification, setMessage }) => {
                         handleOpenModal={handleOpenModal}
                         getSearchPhrase={getSearchPhrase}
                         getPage={getPage}
-                        getClearedSearch={getClearedSearch}
                         setShowNotification={setShowNotification}
                         setMessage={setMessage}
                     />
                 </Row>
                 <Row className="text-center">
                     <Col>
-                        <BigButton onClick={handleLoadMore} className="mx-auto mt-5" />
+                        <BigButton
+                            id="btnLoadMore"
+                            onClick={handleLoadMore}
+                            className="mx-auto mt-5" />
                     </Col>
                 </Row>
             </Container>
@@ -91,15 +86,6 @@ const Dashboard = ({ setShowNotification, setMessage }) => {
                     onCancel={() => setModalShow(false)}
                 />
             </CenteredModal>
-
-            {/* DEVVING  
-            <pre style={{ color: "#333", position: "fixed", top: "10px", right: "50px", border: "2px solid yellow", backgroundColor: "rgb(255, 255, 255, .7)", fontSize: "1.4em" }}>
-                {JSON.stringify({
-                    page,
-                    clearedSearch,
-                    search
-                }, null, 2)}</pre>
-      */}
         </>
     )
 }

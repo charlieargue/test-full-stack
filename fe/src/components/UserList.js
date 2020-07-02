@@ -28,38 +28,24 @@ const UserList = ({ getSearchPhrase, handleOpenModal, getPage, setShowNotificati
                 setShowNotification(true)
             } else {
                 if (isEmpty(getSearchPhrase())) {
-                    // ONLY if NOT searching actively!
                     // if NO search phrase, append results!
-                    // NOTE: only if we didn't just clear the search!
-                    // if (getClearedSearch() === false) {
-                    console.log('getSearchPhrase() :>> ', getSearchPhrase());
-                    console.log('setting users, NO SEARCH PHRASE')
-
-                    // add logic here to what, make sure that no ideas from target are already in source?
-                    // sheeesh
                     const noDupes = (u) => {
                         // we want every new record to NOT exist in the OLD records
                         return users.find(x => x.id === u.id) === undefined
                     }
                     if (result.data.filteredUsers.every(noDupes)) {
-                        console.log('setting users, NO SEARCH PHRASE ---> ✅ NO DUPES, ok to append!')
                         setUsers([...users, ...result.data.filteredUsers])
                     } else {
-                        console.log('setting users, NO SEARCH PHRASE, ❌ cannot APPEND, got dupes')
                         setUsers([...result.data.filteredUsers])
                     }
-                    // } else {
-                    //     console.log('setting users, search phrase was just cleared!')
-                    //     setUsers([...result.data.filteredUsers])
-                    // }
                 } else {
-                    console.log('setting users, we got a search phrease')
                     // if we have a search phrase, just show the most recent results
                     setUsers([...result.data.filteredUsers])
                 }
             }
         }
-    }, [result.data])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [result, getSearchPhrase, setMessage, setShowNotification])
 
     // --------------
     if (result.loading) {

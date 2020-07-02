@@ -14,7 +14,7 @@ describe('User Tests', () => {
     })
 
     // --------------
-    it('Can get users on dashboard', () => {
+    it('User exists on dashboard', () => {
         cy.contains(beforeName)
     })
 
@@ -34,10 +34,10 @@ describe('User Tests', () => {
             .type('{enter}')
 
         cy.contains('Edit User').should('not.be.visible')
-        
+
         cy.contains(beforeName).should('not.be.visible')
     })
-    
+
     // --------------
     it('Can put things back', () => {
         cy.contains(afterName).click()
@@ -48,10 +48,10 @@ describe('User Tests', () => {
             .type('{enter}')
 
         cy.contains('Edit User').should('not.be.visible')
-        
+
         cy.contains(beforeName).should('be.visible')
     })
-    
+
     // --------------
     it('User names must be unique', () => {
         cy.contains(beforeName).click()
@@ -60,9 +60,93 @@ describe('User Tests', () => {
             .type('{selectall}{backspace}')
             .type('Kieslowski')
             .type('{enter}')
-        cy.pause()
-        // cy.contains('Edit User').should('not.be.visible')
-        
-        // cy.contains(beforeName).should('be.visible')
+
+        // click save
+        cy.get('#btnSaveUserForm').click()
+
+        // remain in modal, see toast error msg
+        cy.contains('Edit User').should('be.visible')
+
+        cy
+            .get('.toast')
+            .contains('🚨Duplicate: Names must be unique!')
+    })
+
+    // --------------
+    it('No results raises toast message', () => {
+        // search for "cat"
+        cy
+            .get('#searchForm')
+            .type('cat')
+
+        cy
+            .get('.toast')
+            .contains('🚨No results: Please try again!')
+    })
+
+    // --------------
+    it('Dashboard initially shows 6 cards and can load more until toast message', () => {
+        // expect 6 results
+        cy
+            .get('.card')
+            .its('length')
+            .should('be.eq', 6)
+
+        // load more (expect 12)
+        cy.get('#btnLoadMore').click()
+        cy.wait(1000)
+        cy
+            .get('.card')
+            .its('length')
+            .should('be.eq', 12)
+
+        // scrolling should work, so button Load More should be visible
+        cy.get('#btnLoadMore').should('be.visible')
+
+        // load more (expect 13 total)
+        cy.get('#btnLoadMore').click()
+        cy.wait(1000)
+        cy
+            .get('.card')
+            .its('length')
+            .should('be.eq', 13)
+
+        // scrolling should work, so button Load More should be visible
+        cy.get('#btnLoadMore').should('be.visible')
+
+        // one more click should result in toast message
+        cy.get('#btnLoadMore').click()
+
+        cy
+            .get('.toast')
+            .contains('🚨No results: Please try again!')
+    })
+
+    // --------------
+    it('Searching works as expected (and resets correctly)', () => {
+        // search for "Bob"
+        cy
+            .get('#searchForm')
+            .type('Bob')
+
+        // wait
+        cy.wait(1000)
+
+        // expect 2 results
+        cy
+            .get('.card')
+            .its('length')
+            .should('be.eq', 2)
+
+        // clear search form, should see 6 cards again
+        cy
+            .get('#searchForm')
+            .type('{selectall}{backspace}')
+        cy.wait(1000)
+        cy
+            .get('.card')
+            .its('length')
+            .should('be.eq', 6)
+
     })
 })
