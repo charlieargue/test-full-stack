@@ -116,7 +116,7 @@ button.big-button {
 }
 @media only screen and (max-width: 1100px) {
   button.big-button {
-    padding: 8px 24px !important;
+    padding: 8px 32px !important;
     width: auto !important;
   }
 }
