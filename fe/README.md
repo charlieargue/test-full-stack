@@ -1,3 +1,10 @@
+😀 Write clear **documentation** on how the app was designed and how to run the code.
+😀 ONE LINER INTRO: I want you to explain the value it brings to a specific type of person/company. 
+😀 clean up all this CRA shit...
+
+# Front-End Client (React)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
