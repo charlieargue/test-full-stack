@@ -1,13 +1,13 @@
 {
   "name": "be",
   "version": "1.0.0",
-  "description": "back-end for superformula test",
+  "description": "A GraphQL Apollo-Server backend using *MongoDB* with basic CRUD functionality on a single Users collection, written for Superformula's interview test.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Karl Golka",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "2.0.4"
   },
