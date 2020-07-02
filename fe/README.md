@@ -21,6 +21,11 @@ npm i
 
 # Quick Start
 
+You will need to grab a `.env` environment variable file:
+```
+🛑 Both the front-end and the back-end will not work without the correct .env files!
+```
+
 ```sh
 # start the app locally
 npm start
