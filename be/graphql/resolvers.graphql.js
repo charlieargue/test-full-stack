@@ -10,38 +10,44 @@ const resolvers = {
             try {
                 const perPage = 6
                 const page = args.page || 0
+                const findClause = {
+                    $or: [
+                        {
+                            "name": {
+                                "$regex": args.search || "",
+                                "$options": "i"
+                            },
+                        },
+                        {
+                            "address": {
+                                "$regex": args.search || "",
+                                "$options": "i"
+                            },
+                        },
+                        {
+                            "description": {
+                                "$regex": args.search || "",
+                                "$options": "i"
+                            },
+                        }
+                    ]
+                }
                 // NOTE: if there is a search phrase, we DO NOT PAGE ANYMORE but return all the results
-                return await User
-                    .find({
-                        $or: [
-                            {
-                                "name": {
-                                    "$regex": args.search || "",
-                                    "$options": "i"
-                                },
-                            },
-                            {
-                                "address": {
-                                    "$regex": args.search || "",
-                                    "$options": "i"
-                                },
-                            },
-                            {
-                                "description": {
-                                    "$regex": args.search || "",
-                                    "$options": "i"
-                                },
-                            }
-                        ]
-                    })
-                    .skip(perPage * page)
-                    .limit(perPage)
-                    .sort({
-                        createdAt: 'asc'
-                    })
-                    // DEVVING: .limit(perPage * (page + 1))
-
-
+                if (args.search) {
+                    return await User
+                        .find(findClause)
+                        .sort({
+                            createdAt: 'asc'
+                        })
+                } else {
+                    return await User
+                        .find(findClause)
+                        .skip(perPage * page)
+                        .limit(perPage)
+                        .sort({
+                            createdAt: 'asc'
+                        })
+                }
             } catch (error) {
                 throw new UserInputError(error.message, {
                     invalidArgs: args,
