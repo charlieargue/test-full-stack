@@ -25,7 +25,7 @@ const defs = `
 
  type Query {
      allUsers: [User!]!
-     filteredUsers(search: String): [User!]!
+     filteredUsers(search: String, page: Int): [User!]!
  }
 
  type Mutation {

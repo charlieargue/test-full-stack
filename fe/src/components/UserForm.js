@@ -15,7 +15,7 @@ Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 // --------------
 // --------------
 // --------------
-const UserForm = ({ currentUser, onCancel }) => {
+const UserForm = ({ currentUser, onCancel, getPage }) => {
     // component state for managing form state
     const initialCoords = {
         lat: -1.2884,
@@ -33,7 +33,10 @@ const UserForm = ({ currentUser, onCancel }) => {
         refetchQueries: [
             {
                 query: FILTERED_USERS,
-                variables: { search: null }
+                variables: {
+                    search: null,
+                    page: getPage(),
+                }
             }
         ],
         // error handling!

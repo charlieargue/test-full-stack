@@ -14,8 +14,8 @@ query {
 `
 
 export const FILTERED_USERS = gql`
-query FilteredUsers($search: String) {
-    filteredUsers(search: $search) {
+query FilteredUsers($search: String, $page: Int) {
+    filteredUsers(search: $search, page: $page) {
       id
       name
       description

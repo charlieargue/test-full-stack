@@ -8,28 +8,40 @@ const resolvers = {
         },
         filteredUsers: async (root, args) => {
             try {
-                return await User.find({
-                    $or: [
-                        {
-                            "name": {
-                                "$regex": args.search || "",
-                                "$options": "i"
+                const perPage = 6
+                const page = args.page || 0
+                // NOTE: if there is a search phrase, we DO NOT PAGE ANYMORE but return all the results
+                return await User
+                    .find({
+                        $or: [
+                            {
+                                "name": {
+                                    "$regex": args.search || "",
+                                    "$options": "i"
+                                },
                             },
-                        },
-                        {
-                            "address": {
-                                "$regex": args.search || "",
-                                "$options": "i"
+                            {
+                                "address": {
+                                    "$regex": args.search || "",
+                                    "$options": "i"
+                                },
                             },
-                        },
-                        {
-                            "description": {
-                                "$regex": args.search || "",
-                                "$options": "i"
-                            },
-                        }
-                    ]
-                })
+                            {
+                                "description": {
+                                    "$regex": args.search || "",
+                                    "$options": "i"
+                                },
+                            }
+                        ]
+                    })
+                    .skip(perPage * page)
+                    .limit(perPage)
+                    .sort({
+                        createdAt: 'asc'
+                    })
+                    // DEVVING: .limit(perPage * (page + 1))
+
+
             } catch (error) {
                 throw new UserInputError(error.message, {
                     invalidArgs: args,
