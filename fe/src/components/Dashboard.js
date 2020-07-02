@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 // --------------
 // --------------
 // --------------
-const Dashboard = () => {
+const Dashboard = ({ setShowNotification, setMessage }) => {
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [currentUser, setCurrentUser] = useState(null)
@@ -70,6 +70,8 @@ const Dashboard = () => {
                         getSearchPhrase={getSearchPhrase}
                         getPage={getPage}
                         getClearedSearch={getClearedSearch}
+                        setShowNotification={setShowNotification}
+                        setMessage={setMessage}
                     />
                 </Row>
                 <Row className="text-center">
@@ -82,6 +84,8 @@ const Dashboard = () => {
                 show={modalShow}
             >
                 <UserForm
+                    setMessage={setMessage}
+                    setShowNotification={setShowNotification}
                     getPage={getPage}
                     currentUser={currentUser}
                     onCancel={() => setModalShow(false)}

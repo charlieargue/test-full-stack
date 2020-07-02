@@ -15,7 +15,7 @@ Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 // --------------
 // --------------
 // --------------
-const UserForm = ({ currentUser, onCancel, getPage }) => {
+const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMessage }) => {
     // component state for managing form state
     const initialCoords = {
         lat: -1.2884,
@@ -41,8 +41,22 @@ const UserForm = ({ currentUser, onCancel, getPage }) => {
         ],
         // error handling!
         onError: (error) => {
-            // TODO: snackar and/or alert!
-            console.error(error)
+            // TODO: combine this into one method!
+            console.log('error :>> ', error);
+            setMessage('🚨Duplicate: Names must be unique!')
+            setShowNotification(true)
+        },
+        onCompleted: () => {
+            console.log('onCompleted')
+            // reset the form
+            setName('')
+            setAddress('')
+            setDescription('')
+            // reset showMap
+            setShowMap(false)
+
+            // and close it
+            onCancel()
         }
     })
     // --------------
@@ -65,15 +79,7 @@ const UserForm = ({ currentUser, onCancel, getPage }) => {
             }
         })
 
-        // reset the form
-        setName('')
-        setAddress('')
-        setDescription('')
-        // reset showMap
-        setShowMap(false)
 
-        // and close it
-        onCancel()
     }
 
     // --------------

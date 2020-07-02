@@ -6,7 +6,6 @@ import { BrowserRouter as Router } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ui/styles.css';
 import App from './App';
-import ApplicationLayout from './components/layout/ApplicationLayout';
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
 import GLOBALS from './globals';
 
@@ -28,9 +27,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
-        <ApplicationLayout>
           <App />
-        </ApplicationLayout>
       </Suspense>
     </Router>
   </ApolloProvider>,
