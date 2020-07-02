@@ -41,7 +41,7 @@ Open [http://localhost:4000](http://localhost:4000) to open the **GraphQL Playgr
 You can use these in the **GraphQL Playground**, but you can easily break the e2e tests:
 ```js
 
-✅query {
+✅ query {
   allUsers {
     id
     name
@@ -51,7 +51,7 @@ You can use these in the **GraphQL Playground**, but you can easily break the e2
   }
 }
 
-✅query {
+✅ query {
   filteredUsers(search: null, page: 2) {
     id
     name
