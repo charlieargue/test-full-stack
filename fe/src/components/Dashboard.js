@@ -7,11 +7,13 @@ import UserList from './UserList'
 import SearchForm from './SearchForm'
 import { debounce } from 'lodash'
 import { scrollToBottom } from '../services/utilities.service'
+import { useHistory } from "react-router-dom";
 
 // --------------
 // --------------
 // --------------
 const Dashboard = () => {
+    const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
     const [currentUser, setCurrentUser] = useState(null)
     const [search, setSearch] = useState(null)
@@ -45,6 +47,7 @@ const Dashboard = () => {
     // --------------
     const handleLoadMore = () => {
         setPage(page + 1)
+        history.push(`/?page=${page}`)
         setTimeout(scrollToBottom, 500)
     }
 
@@ -86,13 +89,13 @@ const Dashboard = () => {
             </CenteredModal>
 
             {/* DEVVING  
-      */}
             <pre style={{ color: "#333", position: "fixed", top: "10px", right: "50px", border: "2px solid yellow", backgroundColor: "rgb(255, 255, 255, .7)", fontSize: "1.4em" }}>
                 {JSON.stringify({
                     page,
                     clearedSearch,
                     search
                 }, null, 2)}</pre>
+      */}
         </>
     )
 }
