@@ -4,7 +4,6 @@ const defs = require('./graphql/type-defs.graphql')
 const resolvers = require('./graphql/resolvers.graphql')
 const mongoose = require('mongoose')
 const urlDatabase = process.env.MONGODB_URI
-// TODO: backup my .env file somewhere!
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true)
 
