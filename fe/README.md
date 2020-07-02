@@ -63,7 +63,7 @@ npm test
 
 Then to run all tests, click the `user_spec.js` test file, and you should see:
 
-![Cypress running tests](how-to-cypress-tests.mp4)
+![Cypress running tests](how-to-cypress-tests.gif)
 
 
 
