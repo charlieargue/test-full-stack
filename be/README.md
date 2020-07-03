@@ -6,6 +6,10 @@ A **Node.js** backend using **GraphQL**, **Apollo-Server**, and **MongoDB** with
 # How to install
 
 ```sh
+
+# make sure you are on the correct branch:
+git checkout karlgolka
+
 # change directory into the back-end subdirectory
 cd be
 

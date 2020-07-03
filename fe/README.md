@@ -8,6 +8,10 @@ This project includes **Cypress End-to-End** (e2e) tests.
 # How to install
 
 ```sh
+
+# make sure you are on the correct branch:
+git checkout karlgolka
+
 # change directory into the front-end subdirectory
 cd fe
 
