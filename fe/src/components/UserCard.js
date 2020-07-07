@@ -4,10 +4,8 @@ import EditIcon from "../ui/svg/edit-icon.svg"
 import Moment from 'react-moment'
 
 
-
-
 const UserCard = ({ user, openModal }) => {
-    
+
     return (
         <Card className="p-3 py-5 mb-5" onClick={() => openModal(true)}>
             <Image
@@ -19,11 +17,6 @@ const UserCard = ({ user, openModal }) => {
                 <Image
                     style={{
                         background: `transparent url('https://source.unsplash.com/collection/3053437/${user.id}') no-repeat 50% 50%`,
-                        maxWidth: "168px",
-                        width: "168px",
-                        height: "168px",
-                        borderRadius: "90%/100%",
-                        backgroundSize: "cover",
                     }} roundedCircle />
             </div>
 
@@ -33,8 +26,8 @@ const UserCard = ({ user, openModal }) => {
                         <Row noGutters={true}>
                             <Col className="text-ellipsis">{user.name}</Col>
                             <Col className="card-title-byline" style={{ display: "none" }}>created <span>
-                            {/* WE WANT: 01 Feb 2020 */}
-                            <Moment unix format="DD MMM YYYY">{user.createdAt}</Moment>
+                                {/* WE WANT: 01 Feb 2020 */}
+                                <Moment unix format="DD MMM YYYY">{user.createdAt}</Moment>
                             </span></Col>
                         </Row>
                     </Container>

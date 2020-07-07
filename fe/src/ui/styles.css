@@ -101,6 +101,14 @@ h1 {
   display: block !important;
 }
 
+.card img.rounded-circle {
+  max-width: 168px;
+  width: 168px;
+  height: 168px;
+  border-radius: 90%/100%;
+  background-size: cover;
+}
+
 button.big-button {
   background: #FFFFFF;
   border: 4px solid rgba(0, 0, 0, 0.1);
