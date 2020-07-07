@@ -22,16 +22,16 @@ const App = (props) => {
     const [message, setMessage] = useState('')
 
     // (state variables getters to pass to children and other components)
-    const getShowNotification = () => showNotification
-    const getMessage = () => message
+    // const getShowNotification = () => showNotification
+    // const getMessage = () => message
 
 
     return (
         <React.Fragment>
             <Notification
-                getMessage={getMessage}
+                message={message}
                 setShowNotification={setShowNotification}
-                getShowNotification={getShowNotification} />
+                showNotification={showNotification} />
             <ApplicationLayout>
                 <Switch>
                     <Route path="/">

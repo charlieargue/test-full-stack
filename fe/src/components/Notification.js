@@ -4,12 +4,12 @@ import { Toast, Alert } from "react-bootstrap"
 
 
 
-const Notification = ({ setShowNotification, getShowNotification, getMessage }) => {
+const Notification = ({ setShowNotification, showNotification, message }) => {
     
     return (
         <Toast
             onClose={() => setShowNotification(false)}
-            show={getShowNotification()}
+            show={showNotification}
             delay={3000}
             autohide
             style={{
@@ -24,7 +24,7 @@ const Notification = ({ setShowNotification, getShowNotification, getMessage }) 
                 <strong className="mr-auto">Error</strong>
             </Toast.Header>
             <Alert variant="danger" className="m-2">
-                {getMessage()}
+                {message}
             </Alert>
         </Toast>
     )
