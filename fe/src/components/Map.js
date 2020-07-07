@@ -17,7 +17,7 @@ const MapContainer = (props) => {
     
     return (
         <Map
-            visible={props.getterShowMap()}
+            visible={props.showMap}
             google={props.google}
             zoom={14}
             style={mapStyles}

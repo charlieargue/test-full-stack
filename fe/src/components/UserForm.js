@@ -114,8 +114,6 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
     }
 
      
-    const getterShowMap = () => showMap
-
     
     useEffect(() => {
         debouncedGeocoding(currentUser.address)
@@ -131,7 +129,7 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
                 <Row>
                     <Col>
                         <Map
-                            getterShowMap={getterShowMap}
+                            showMap={showMap}
                             locationCoordinates={locationCoordinates} />
                     </Col>
                     <Col>
