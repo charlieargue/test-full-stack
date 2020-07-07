@@ -9,19 +9,19 @@ import App from './App';
 import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
 import GLOBALS from './globals';
 
-// --------------
+
 const httpLink = new HttpLink({
   uri: GLOBALS.API.BASE_URL,
 })
 
-// --------------
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: httpLink
 })
-// --------------
-// --------------
-// --------------
+
+
+
 // NOTE: removed <React.StrictMode> b/c conflict with react-bootstrap modal animation (which was a requirement)
 ReactDOM.render(
   <ApolloProvider client={client}>

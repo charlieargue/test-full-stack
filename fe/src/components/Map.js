@@ -10,11 +10,11 @@ const mapStyles = {
     borderRadius: "8px"
 }
 
-// --------------
-// --------------
-// --------------
+
+
+
 const MapContainer = (props) => {
-    // --------------
+    
     return (
         <Map
             visible={props.getterShowMap()}

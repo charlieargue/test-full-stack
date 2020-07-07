@@ -1,5 +1,5 @@
 
-// --------------
+
 const scrollToTop = () => {
     try {
         // trying to use new API - https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
@@ -14,7 +14,7 @@ const scrollToTop = () => {
     }
 }
 
-// --------------
+
 const scrollToBottom = () => {
     try {
         // trying to use new API - https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo

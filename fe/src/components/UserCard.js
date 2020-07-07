@@ -3,11 +3,11 @@ import { Image, Card, Container, Row, Col } from "react-bootstrap";
 import EditIcon from "../ui/svg/edit-icon.svg"
 import Moment from 'react-moment'
 
-// --------------
-// --------------
-// --------------
+
+
+
 const UserCard = ({ user, openModal }) => {
-    // --------------
+    
     return (
         <Card className="p-3 py-5 mb-5" onClick={() => openModal(true)}>
             <Image

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Toast, Alert } from "react-bootstrap"
 
-// --------------
-// --------------
-// --------------
+
+
+
 const Notification = ({ setShowNotification, getShowNotification, getMessage }) => {
-    // --------------
+    
     return (
         <Toast
             onClose={() => setShowNotification(false)}

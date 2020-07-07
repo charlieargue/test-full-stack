@@ -6,9 +6,9 @@ import { Col } from "react-bootstrap"
 import Fade from 'react-bootstrap/Fade'
 import { isEmpty } from 'lodash'
 
-// --------------
-// --------------
-// --------------
+
+
+
 const UserList = ({ getSearchPhrase, handleOpenModal, getPage, setShowNotification, setMessage }) => {
     const [users, setUsers] = useState([])
     const result = useQuery(FILTERED_USERS, {
@@ -18,7 +18,7 @@ const UserList = ({ getSearchPhrase, handleOpenModal, getPage, setShowNotificati
         },
     })
 
-    // --------------
+    
     useEffect(() => {
         // You can also do a functional update 'setUsers(u => ...)' if you only need 'users' in the 'setUsers' call  react-hooks/exhaustive-deps
         if (!result.loading) {
@@ -47,13 +47,13 @@ const UserList = ({ getSearchPhrase, handleOpenModal, getPage, setShowNotificati
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result, getSearchPhrase, setMessage, setShowNotification])
 
-    // --------------
+    
     if (result.loading) {
         // TODO: style me!
         return <div>loading...</div>
     }
 
-    // --------------
+    
     return (
         <>
             {users.map(u =>

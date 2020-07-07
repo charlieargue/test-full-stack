@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from "react-bootstrap";
 
-// --------------
-// --------------
-// --------------
+
+
+
 const BigButton = (props) => {
     const styles = {
         background: '#FFFFFF',
@@ -11,7 +11,7 @@ const BigButton = (props) => {
         boxSizing: 'border-box',
         borderRadius: '8px',
     }
-    // --------------
+    
     return (
         <Button {...props}
             className="px-5 py-3 big-button"

@@ -11,9 +11,9 @@ import Geocode from "react-geocode"
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
 
-// --------------
-// --------------
-// --------------
+
+
+
 const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMessage }) => {
     const initialCoords = {
         lat: -1.2884,
@@ -26,7 +26,7 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
     const [locationCoordinates, setLocationCoordinates] = useState(initialCoords)
     const [showMap, setShowMap] = useState(false)
 
-    // --------------
+    
     const [editUser] = useMutation(EDIT_USER, {
         refetchQueries: [
             {
@@ -58,7 +58,7 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
             onCancel()
         }
     })
-    // --------------
+    
     const submit = async (event) => {
         event.preventDefault()
         const form = event.currentTarget
@@ -81,7 +81,7 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
 
     }
 
-    // --------------
+    
     const getLatLongFromAddress = async (strLocation) => {
         // Get latitude & longitude from address.
         try {
@@ -95,33 +95,33 @@ const UserForm = ({ currentUser, onCancel, getPage, setShowNotification, setMess
             // could not find location, return some recognizable place as default
             setMessage('🚨Location not found, please try again!')
             setShowNotification(true)
-            // --------------
+            
             return initialCoords
         }
     }
 
-    // --------------
+    
     const debouncedGeocoding = useCallback(debounce(async (strLocation) => {
         const newCoords = await getLatLongFromAddress(strLocation)
         setLocationCoordinates(newCoords)
         setShowMap(true)
     }, 500), [])
 
-    // --------------
+    
     const handleAddressChange = async ({ target }) => {
         setAddress(target.value)
         debouncedGeocoding(target.value)
     }
 
-    // -------------- 
+     
     const getterShowMap = () => showMap
 
-    // --------------
+    
     useEffect(() => {
         debouncedGeocoding(currentUser.address)
     }, [currentUser.address, debouncedGeocoding])
 
-    // --------------
+    
     return (
         <>
             <Container fluid className="pb-2">

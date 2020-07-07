@@ -1,30 +1,30 @@
 const FE_URL = 'http://localhost:3000/'
-// --------------
-// --------------
+
+
 // ATTENTION: these tests must be run in order (so do not activate cypress PARALLEL runs until refactored)
-// --------------
-// --------------
+
+
 describe('User Tests', () => {
     const beforeName = 'Howard Simon'
     const afterName = 'New Guy'
 
-    // --------------
+    
     beforeEach(() => {
         cy.visit(FE_URL)
     })
 
-    // --------------
+    
     it('User exists on dashboard', () => {
         cy.contains(beforeName)
     })
 
-    // --------------
+    
     it('Can get click a user and get a modal', () => {
         cy.contains(beforeName).click()
         cy.contains('Edit User')
     })
 
-    // --------------
+    
     it('Can save users name and user list should immediately reflect that', () => {
         cy.contains(beforeName).click()
 
@@ -38,7 +38,7 @@ describe('User Tests', () => {
         cy.contains(beforeName).should('not.be.visible')
     })
 
-    // --------------
+    
     it('Can put things back', () => {
         cy.contains(afterName).click()
 
@@ -52,7 +52,7 @@ describe('User Tests', () => {
         cy.contains(beforeName).should('be.visible')
     })
 
-    // --------------
+    
     it('User names must be unique', () => {
         cy.contains(beforeName).click()
 
@@ -72,7 +72,7 @@ describe('User Tests', () => {
             .contains('🚨Duplicate: Names must be unique!')
     })
 
-    // --------------
+    
     it('No results raises toast message', () => {
         // search for "cat"
         cy
@@ -84,7 +84,7 @@ describe('User Tests', () => {
             .contains('🚨No results: Please try again!')
     })
 
-    // --------------
+    
     it('Dashboard initially shows 6 cards and can load more until toast message', () => {
         // expect 6 results
         cy
@@ -122,7 +122,7 @@ describe('User Tests', () => {
             .contains('🚨No results: Please try again!')
     })
 
-    // --------------
+    
     it('Searching works as expected (and resets correctly)', () => {
         // search for "Bob"
         cy
@@ -151,7 +151,7 @@ describe('User Tests', () => {
     })
 
 
-    // --------------
+    
     it('No locations found for map raises toast message', () => {
 
         cy.contains(beforeName).click()

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Modal } from "react-bootstrap";
 
-// --------------
-// --------------
-// --------------
+
+
+
 const CenteredModal = (props) => {
-    // --------------
+    
     return (
         <Modal
             {...props}

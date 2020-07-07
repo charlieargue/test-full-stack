@@ -9,9 +9,9 @@ import { debounce } from 'lodash'
 import { scrollToBottom } from '../services/utilities.service'
 import { useHistory } from "react-router-dom";
 
-// --------------
-// --------------
-// --------------
+
+
+
 const Dashboard = ({ setShowNotification, setMessage }) => {
     const history = useHistory()
     const [modalShow, setModalShow] = React.useState(false);
@@ -19,33 +19,33 @@ const Dashboard = ({ setShowNotification, setMessage }) => {
     const [search, setSearch] = useState(null)
     const [page, setPage] = useState(0)
 
-    // --------------
+    
     const handleOpenModal = (cu) => {
         setCurrentUser(cu)
         setModalShow(true)
     }
 
-    // --------------
+    
     const getSearchPhrase = () => {
         return search
     }
 
-    // --------------
+    
     const getPage = () => {
         return page
     }
 
-    // --------------
+    
     const setSearchDebounced = debounce(setSearch, 1000)
 
-    // --------------
+    
     const handleLoadMore = () => {
         setPage(page + 1)
         history.push(`/?page=${page}`)
         setTimeout(scrollToBottom, 500)
     }
 
-    // --------------
+    
     return (
         <>
             <Container fluid>
