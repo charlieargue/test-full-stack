@@ -22,6 +22,7 @@ const defs = `
     updatedAt: String!
  }
 
+ 
 
  type Query {
      allUsers: [User!]!

@@ -1,8 +1,5 @@
 import React from 'react'
 import { Container, Row, Col } from "react-bootstrap";
-import { withRouter } from "react-router";
-
-
 
 
 const AppLayout = ({ children }) => {
@@ -18,5 +15,5 @@ const AppLayout = ({ children }) => {
         </Container>
     )
 }
-const ApplicationLayout = withRouter(AppLayout);
-export default ApplicationLayout
+// const ApplicationLayout = withRouter(AppLayout);
+export default AppLayout

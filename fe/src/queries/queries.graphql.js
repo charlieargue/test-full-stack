@@ -1,31 +1,36 @@
 import { gql } from '@apollo/client';
 
+// fragments
+const fragUserResult = gql`
+    fragment userResult on User {
+        id
+        name
+        address
+        description
+        createdAt
+    } 
+`
+
 // GRAPHQL queries
 export const ALL_USERS = gql`
 query {
     allUsers {
-        id
-        name,
-        address,
-      	description,
-        createdAt
+        ...userResult
     }
 }
+${fragUserResult}
 `
 
 export const FILTERED_USERS = gql`
 query FilteredUsers($search: String, $page: Int) {
     filteredUsers(search: $search, page: $page) {
-      id
-      name
-      description
-      address
-      createdAt
+      ...userResult
     }
   }
+${fragUserResult}
 `
 
-  
+
 
 export const EDIT_USER = gql`
 mutation editUser(
